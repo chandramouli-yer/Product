@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -107,3 +108,6 @@ dist
 node_modules
 
 >>>>>>> master
+=======
+node_modules
+>>>>>>> 1b6d2960f1ade63c7988a5f5fcd73993b524d91c
