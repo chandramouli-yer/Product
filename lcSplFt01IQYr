@@ -1,0 +1,50 @@
+[33mcommit 26999cf0597a5bb38185fb82eca6aad1ed16a8ef[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: chandramouli <codechandra@gmail.com>
+Date:   Wed Aug 18 16:05:21 2021 +0530
+
+    changed dev.js
+
+[33mcommit b96ed5fc4958445068fcbf2f035bfd4b89719de7[m
+Merge: 9396aef ee2af80
+Author: Ubuntu <ubuntu@ip-172-31-43-252.us-east-2.compute.internal>
+Date:   Thu Aug 5 08:53:17 2021 +0000
+
+    final
+
+[33mcommit 9396aeff3160e00b891dd2631db5f2a9fe9c599f[m
+Merge: ef316e8 1b6d296
+Author: Ubuntu <ubuntu@ip-172-31-43-252.us-east-2.compute.internal>
+Date:   Thu Aug 5 08:49:55 2021 +0000
+
+    delete .gitignore file
+
+[33mcommit ee2af803d33aa7d9a67499cf75e3b04651f3e6d9[m
+Author: chandra mouli <codechandra@gmail.com>
+Date:   Thu Aug 5 14:19:02 2021 +0530
+
+    Delete .gitignore
+
+[33mcommit ef316e80c8b8f9d83856c40c9abd73e45584eb3e[m
+Merge: c23f231 4d1cdfa
+Author: Ubuntu <ubuntu@ip-172-31-43-252.us-east-2.compute.internal>
+Date:   Thu Aug 5 08:45:34 2021 +0000
+
+    added gitignore
+
+[33mcommit 1b6d2960f1ade63c7988a5f5fcd73993b524d91c[m
+Author: chandra mouli <codechandra@gmail.com>
+Date:   Thu Aug 5 14:14:54 2021 +0530
+
+    Updated .gitignore
+
+[33mcommit 4d1cdfa9650552fb5ade173cec55024e341936cc[m
+Author: Ubuntu <ubuntu@ip-172-31-43-252.us-east-2.compute.internal>
+Date:   Thu Aug 5 08:38:13 2021 +0000
+
+    Initial code push
+
+[33mcommit c23f231a740714f8e47147a417cebb8527a88c16[m
+Author: chandra mouli <codechandra@gmail.com>
+Date:   Thu Aug 5 14:00:27 2021 +0530
+
+    Initial commit
