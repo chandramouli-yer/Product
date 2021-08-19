@@ -42,7 +42,48 @@ app.get('/failed', (req, res) => res.send('You Failed to log in'))
 
 
 app.get('/loggedin', isLoggedIn, (req, res) => {
-   const loginSource=req.user.provider;
+  saveUser(req,res);
+})
+
+app.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+    async function (req, res) {
+        req.body.authSource="GOOGLE";
+        res.redirect('/loggedin');
+    }
+);
+
+
+app.get('/login/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+app.get('/login/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+      req.body.authSource="GITHUB"
+    res.redirect('/loggedin');
+  });
+
+
+
+app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/');
+})
+
+app.get('/getMoreDetails',(req,res)=>{
+    res.send(req.user);
+})
+
+const main=async ()=>{
+    app.listen(process.env.PORT, () => console.log(`Server started listening on port ${process.env.PORT}!`))
+    await dbConnect.connectToMongoDB();
+}
+
+function saveUser(req,res){
+    const loginSource=req.user.provider;
     if(loginSource=="github"){
         console.log("inside git")
         newUser={
@@ -78,7 +119,8 @@ app.get('/loggedin', isLoggedIn, (req, res) => {
         }
         else if (existingUser.length === 1&&!existingUser[0].IsBlocked) {
             console.log(existingUser[0].IsBlocked)
-            res.status(200).json({message:"Welcome back",User:existingUser});
+          //  res.status(200).json({message:"Welcome back",User:existingUser});
+          res.redirect("/getMoreDetails");
         }
         else if((existingUser.length === 1)&&(existingUser[0].IsBlocked)){
             res.status(401).json({message:"OOPS!!Your access is blocked to this product.Kindly write to codechandra@gmail.com to get access",data:existingUser})
@@ -89,7 +131,8 @@ app.get('/loggedin', isLoggedIn, (req, res) => {
 
                 try {
                     const saved_user = await user.save();
-                    res.json({ status: true, message: "Registered successfully.", data: saved_user });
+                   // res.json({ status: true, message: "Registered successfully.", data: saved_user });
+                   res.redirect("/getMoreDetails");
                 } catch (error) {
                     res.status(400).json({ status: false, message: "Something went wrong.", data: error.message });
                 }
@@ -98,39 +141,6 @@ app.get('/loggedin', isLoggedIn, (req, res) => {
         }
 
     })
-})
-
-app.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-app.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-    async function (req, res) {
-        req.body.authSource="GOOGLE";
-        res.redirect('/loggedin');
-    }
-);
-
-
-app.get('/login/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }));
-
-app.get('/login/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-      req.body.authSource="GITHUB"
-    res.redirect('/loggedin');
-  });
-
-
-
-app.get('/logout', (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect('/');
-})
-
-const main=async ()=>{
-    app.listen(process.env.PORT, () => console.log(`Server started listening on port ${process.env.PORT}!`))
-    await dbConnect.connectToMongoDB();
 }
 
 main();
